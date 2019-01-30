@@ -5,7 +5,7 @@ export default function courseReducer(state: Course[] = [], action: CourseAction
     switch (action.type) {
         case CourseActionTypes.CreateCourse:
             return [...state, { ...action.course }];
-            break;
+
         default:
             return state;
     }
