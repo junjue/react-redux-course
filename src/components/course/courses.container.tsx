@@ -1,11 +1,10 @@
 import React, { Component, Dispatch, FormEvent } from "react";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators } from "redux";
-import { CourseActionCreator, CourseActionCreatorFactory } from "../../actions/courseActions";
+
+import { CourseActionCreator, CourseActionCreatorFactory } from "../../actions/course.actions";
+import { Course } from "../../models/course";
 import { State } from "../../store/state";
-export interface Course {
-    title: string;
-}
 
 export interface CourseState {
     course: Course;
@@ -42,6 +41,7 @@ export class CoursesContainer extends Component<State & CourseDispatchProp, Cour
         return (
             <div>
                 <h1>Courses</h1>
+                {this.props.courses.map(this.courseRow)}
                 <h2>Add course</h2>
 
                 <input onChange={this.onTitleChange}

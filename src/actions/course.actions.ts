@@ -1,6 +1,6 @@
 import { ActionCreatorsMapObject, AnyAction } from "redux";
-import { Course } from "../components/course/courses.container";
 
+import { Course } from "../models/course";
 
 export enum CourseActionTypes {
     CreateCourse = "CREATE_COURSE",

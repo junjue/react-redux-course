@@ -1,4 +1,4 @@
-import { CoursesContainer } from './components/course/courses.container';
+import CoursesContainer from './components/course/courses.container';
 import HomeContainer from './components/home/home.container';
 import React from 'react';
 import { AboutContainer } from './components/about/about.container';
