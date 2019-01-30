@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./../reducers/index";
+import rootReducer from "../reducers";
+import immutableStateInvariantMiddleware from "redux-immutable-state-invariant";
 import { State } from "./state";
-import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 export default function configureStore(initialState: State = { courses: [] }) {
     return createStore(
         rootReducer,
         initialState,
-        applyMiddleware(reduxImmutableStateInvariant())
+        composeWithDevTools(applyMiddleware(immutableStateInvariantMiddleware()))
     );
 }

@@ -1,52 +1,70 @@
-import React, { Component } from 'react';
-
-export interface ICoursesProps {
-}
-
-export interface ICoursesState {
-    course: Course,
-}
-
+import React, { Component, Dispatch, FormEvent } from "react";
+import { connect } from "react-redux";
+import { AnyAction, bindActionCreators } from "redux";
+import { CourseActionCreator, CourseActionCreatorFactory } from "../../actions/courseActions";
+import { State } from "../../store/state";
 export interface Course {
-    title: string,
+    title: string;
 }
 
-export default class CoursesContainer extends Component<ICoursesProps, ICoursesState> {
-    constructor(props: ICoursesProps, context: any) {
+export interface CourseState {
+    course: Course;
+}
+
+export interface CourseDispatchProp {
+    actions: CourseActionCreator;
+}
+
+export class CoursesContainer extends Component<State & CourseDispatchProp, CourseState> {
+    state: CourseState = {
+        course: { title: "" }
+    }
+
+    constructor(props: any, context: React.Context<any>) {
         super(props, context);
-        this.state = {
-            course: { title: "" }
-        }
-
-        // can add binding in render, but performance is worse
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onClickSave = this.onClickSave.bind(this);
     }
 
-    onTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    onTitleChange = (event: FormEvent<HTMLInputElement>) => {
         const course = this.state.course;
-        course.title = event.target.value;
-        this.setState({ course: course });
+        course.title = event.currentTarget.value;
+        this.setState({ course });
     }
 
-    onClickSave() {
-        alert(`Saving ${this.state.course.title}`);
+    onClickSave = () => {
+        this.props.actions.createCourse(this.state.course);
+    }
+
+    courseRow(course: Course, index: number) {
+        return <div key={index}>{course.title}</div>
     }
 
     render() {
         return (
             <div>
                 <h1>Courses</h1>
-                <h2>Add Course</h2>
-                <input
+                <h2>Add course</h2>
+
+                <input onChange={this.onTitleChange}
                     type="text"
-                    onChange={this.onTitleChange}
                     value={this.state.course.title} />
-                <input
-                    type="submit"
-                    onClick={this.onClickSave}
-                    value="Save" />
+
+                <input type="submit" value="save" onClick={this.onClickSave} />
             </div>
         )
     }
 }
+
+function mapStateToProps(state: State, ownProps: any): State {
+    return {
+        courses: state.courses
+    }
+}
+
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>): CourseDispatchProp {
+    // todo: why do we have to cast dispatch to any.  kind of goofy.
+    return {
+        actions: bindActionCreators(CourseActionCreatorFactory(), dispatch as any)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesContainer);
