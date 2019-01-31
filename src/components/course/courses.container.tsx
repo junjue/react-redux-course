@@ -15,12 +15,13 @@ export interface CourseDispatchProp {
 }
 
 export class CoursesContainer extends Component<State & CourseDispatchProp, CourseState> {
-    state: CourseState = {
-        course: { title: "" }
-    }
 
     constructor(props: any, context: React.Context<any>) {
         super(props, context);
+
+        this.state = {
+            course: { title: "" }
+        }
     }
 
     onTitleChange = (event: FormEvent<HTMLInputElement>) => {
@@ -43,11 +44,7 @@ export class CoursesContainer extends Component<State & CourseDispatchProp, Cour
                 <h1>Courses</h1>
                 {this.props.courses.map(this.courseRow)}
                 <h2>Add course</h2>
-
-                <input onChange={this.onTitleChange}
-                    type="text"
-                    value={this.state.course.title} />
-
+                <input type="text" value={this.state.course.title} onChange={this.onTitleChange} />
                 <input type="submit" value="save" onClick={this.onClickSave} />
             </div>
         )
@@ -61,8 +58,8 @@ function mapStateToProps(state: State, ownProps: any): State {
 }
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>): CourseDispatchProp {
-    // todo: why do we have to cast dispatch to any.  kind of goofy.
     return {
+        // actions: bindActionCreators(courseActions, dispatch)
         actions: bindActionCreators(CourseActionCreatorFactory(), dispatch as any)
     };
 }
