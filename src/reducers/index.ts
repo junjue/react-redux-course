@@ -1,7 +1,8 @@
-import { combineReducers } from "redux";
+import { combineReducers, Reducer } from "redux";
 import courseReducer from "./course.reducer";
+import { State } from "../store/state";
 
-const rootReducer = combineReducers({
+const rootReducer: Reducer<State> = combineReducers({
     courses: courseReducer
 });
 

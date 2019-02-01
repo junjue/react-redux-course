@@ -1,12 +1,15 @@
-import { Course } from './../models/course';
+import { AnyAction } from 'redux';
 import { CourseActionTypes, CourseActions } from '../actions/course.actions';
+import { State } from '../store/state';
 
-export default function courseReducer(state: Course[] = [], action: CourseActions) {
-    switch (action.type) {
-        case CourseActionTypes.CreateCourse:
-            return [...state, { ...action.course }];
-            break;
+const courseReducer = (state: State, action: AnyAction) => {
+    debugger;
+    switch ((action as CourseActions).type) {
+        case CourseActionTypes.LoadCoursesSuccess:
+            return action.courses;
         default:
-            return state;
+            return [state];
     }
-}
+};
+
+export default courseReducer;

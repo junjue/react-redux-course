@@ -5,10 +5,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import configureStore from './store/configure-store';
+import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
+import { loadCourses } from './actions/course.actions';
 
 const store = configureStore();
+store.dispatch(loadCourses());
 
 ReactDOM.render(
     <Provider store={store}>

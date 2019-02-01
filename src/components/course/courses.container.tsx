@@ -1,10 +1,10 @@
-import React, { Component, Dispatch, FormEvent } from "react";
+import React, { Component, Dispatch } from "react";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators } from "redux";
 
 import { CourseActionCreator, CourseActionCreatorFactory } from "../../actions/course.actions";
-import { Course } from "../../models/course";
 import { State } from "../../store/state";
+import { Course } from "../../models/course";
 
 export interface CourseState {
     course: Course;
@@ -15,23 +15,8 @@ export interface CourseDispatchProp {
 }
 
 export class CoursesContainer extends Component<State & CourseDispatchProp, CourseState> {
-
     constructor(props: any, context: React.Context<any>) {
         super(props, context);
-
-        this.state = {
-            course: { title: "" }
-        }
-    }
-
-    onTitleChange = (event: FormEvent<HTMLInputElement>) => {
-        const course = this.state.course;
-        course.title = event.currentTarget.value;
-        this.setState({ course });
-    }
-
-    onClickSave = () => {
-        this.props.actions.createCourse(this.state.course);
     }
 
     courseRow(course: Course, index: number) {
@@ -42,10 +27,8 @@ export class CoursesContainer extends Component<State & CourseDispatchProp, Cour
         return (
             <div>
                 <h1>Courses</h1>
+                {console.log(this.props.courses)}
                 {this.props.courses.map(this.courseRow)}
-                <h2>Add course</h2>
-                <input type="text" value={this.state.course.title} onChange={this.onTitleChange} />
-                <input type="submit" value="save" onClick={this.onClickSave} />
             </div>
         )
     }

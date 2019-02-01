@@ -1,10 +1,5 @@
 import delay from './delay';
-
-export interface Author {
-    id: string;
-    firstName: string;
-    lastName: string;
-}
+import { Author } from '../models/author';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.

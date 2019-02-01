@@ -1,13 +1,6 @@
 import delay from './delay';
+import { Course } from '../models/course';
 
-export interface Course {
-    id: string;
-    title: string;
-    watchHref: string;
-    authorId: string;
-    length: string;
-    category: string;
-}
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
