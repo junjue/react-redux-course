@@ -8,7 +8,7 @@ const courseReducer = (state: State, action: AnyAction) => {
         case CourseActionTypes.LoadCoursesSuccess:
             return action.courses;
         default:
-            return [state];
+            return state && state.courses ? state.courses : [];
     }
 };
 

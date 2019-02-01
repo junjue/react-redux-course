@@ -6,7 +6,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { State } from "./state";
 
 export default function configureStore(initialState: State = { courses: [] }) {
-    debugger
     return createStore(
         rootReducer,
         initialState,

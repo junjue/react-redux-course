@@ -7,6 +7,7 @@ export interface CourseListProps {
 }
 
 const CourseList = (props: CourseListProps) => {
+    debugger;
     return (
         <table className="table">
             <thead>
