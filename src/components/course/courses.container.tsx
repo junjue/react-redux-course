@@ -5,6 +5,7 @@ import { AnyAction, bindActionCreators } from "redux";
 import { CourseActionCreator, CourseActionCreatorFactory } from "../../actions/course.actions";
 import { State } from "../../store/state";
 import { Course } from "../../models/course";
+import CourseList from "./courseList";
 
 export interface CourseState {
     course: Course;
@@ -27,8 +28,7 @@ export class CoursesContainer extends Component<State & CourseDispatchProp, Cour
         return (
             <div>
                 <h1>Courses</h1>
-                {console.log(this.props.courses)}
-                {this.props.courses.map(this.courseRow)}
+                <CourseList courses={this.props.courses} />
             </div>
         )
     }
